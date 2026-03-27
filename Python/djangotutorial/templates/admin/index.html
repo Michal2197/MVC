@@ -1,0 +1,19 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+<div id="content-main">
+    <h1>Polls Administration Home</h1>
+    <p>Witaj w panelu administracyjnym aplikacji ankietowej.</p>
+
+    <h2>Szybkie linki</h2>
+    <ul>
+        <li><a href="{% url 'admin:polls_question_changelist' %}">Questions</a></li>
+        <li><a href="{% url 'admin:polls_question_add' %}">Dodaj pytanie</a></li>
+        <li><a href="{% url 'polls:index' %}">Zobacz stronę ankiet</a></li>
+    </ul>
+
+    <hr>
+
+    {{ block.super }}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+@model SystemMonitorowaniaWydatkowDomowych.Models.Wydatek
+
+<h1>Edytuj wydatek</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <input type="hidden" asp-for="KategoriaId" />
+    <input type="hidden" asp-for="MetodaPlatnosciId" />
+
+    <div>
+        <label asp-for="Opis"></label>
+        <input asp-for="Opis" />
+    </div>
+
+    <div>
+        <label asp-for="Kwota"></label>
+        <input asp-for="Kwota" />
+    </div>
+
+    <div>
+        <label asp-for="Data"></label>
+        <input asp-for="Data" type="date" />
+    </div>
+
+    <br />
+
+    <button type="submit">Zapisz zmiany</button>
+</form>
+
+<br />
+
+<a asp-action="Index">Powrót do listy</a>
+
+
+

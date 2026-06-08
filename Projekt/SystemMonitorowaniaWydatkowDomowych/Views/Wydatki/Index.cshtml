@@ -1,0 +1,39 @@
+@model IEnumerable<SystemMonitorowaniaWydatkowDomowych.Models.Wydatek>
+
+<h1>Lista wydatków</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Dodaj wydatek</a>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Opis</th>
+            <th>Kwota</th>
+            <th>Data</th>
+            <th>Kategoria</th>
+            <th>Metoda płatności</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var wydatek in Model)
+        {
+            <tr>
+                <td>@wydatek.Opis</td>
+                <td>@wydatek.Kwota</td>
+                <td>@wydatek.Data.ToShortDateString()</td>    
+                <td>@wydatek.Kategoria.Nazwa</td>   
+                <td>@wydatek.MetodaPlatnosci.Nazwa</td>   
+                <td>
+                    <a asp-action="Edit" asp-route-id="@wydatek.Id">Edytuj</a> |
+                    <a asp-action="Delete" asp-route-id="@wydatek.Id">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

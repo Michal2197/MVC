@@ -17,12 +17,53 @@ namespace SystemMonitorowaniaWydatkowDomowych.Controllers
             _kontekst = kontekst;
         }
 
-        public async Task<IActionResult> Index()       
+        public async Task<IActionResult> Index(
+            int? kategoriaId,
+            string? szukaj,
+            string? sortowanie)
+
         {
-            var wydatki = await _kontekst.Wydatki
-                .Include(w => w.Kategoria)   
+            var wydatkiQuery = _kontekst.Wydatki
+                .Include(w => w.Kategoria)
                 .Include(w => w.MetodaPlatnosci)
-                .ToListAsync();  
+                .AsQueryable();
+
+            if (kategoriaId.HasValue)
+            {
+                wydatkiQuery = wydatkiQuery.Where(w => w.KategoriaId == kategoriaId.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(szukaj))
+            {
+                wydatkiQuery = wydatkiQuery.Where(w => w.Opis.Contains(szukaj));
+            }
+
+            if (sortowanie == "kwota_rosnaco")
+            {
+                wydatkiQuery = wydatkiQuery.OrderBy(w => w.Kwota);
+            }
+            else if (sortowanie == "kwota_malejaco")
+            {
+                wydatkiQuery = wydatkiQuery.OrderByDescending(w => w.Kwota);
+            }
+
+
+            var wydatki = await wydatkiQuery.ToListAsync();
+
+
+            ViewBag.SumaWydatkow = wydatki.Sum(w => w.Kwota);
+            ViewBag.Kategorie = new SelectList(_kontekst.Kategorie, "Id", "Nazwa", kategoriaId);
+            ViewBag.Szukaj = szukaj;
+            ViewBag.Sortowanie = sortowanie;
+
+            ViewBag.PodsumowanieKategorii = wydatki
+            .GroupBy(w => w.Kategoria.Nazwa)
+            .Select(g => new
+            {
+                Kategoria = g.Key,
+                Suma = g.Sum(w => w.Kwota)
+            })
+            .ToList();
 
             return View(wydatki);
         }
@@ -86,6 +127,8 @@ namespace SystemMonitorowaniaWydatkowDomowych.Controllers
             return View(wydatek);
         }
 
+
+
         public async Task<IActionResult> Delete(int id)
         {
             var wydatek = await _kontekst.Wydatki
@@ -115,6 +158,8 @@ namespace SystemMonitorowaniaWydatkowDomowych.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
 
         public async Task<IActionResult> DodajDaneTestowe()
         {

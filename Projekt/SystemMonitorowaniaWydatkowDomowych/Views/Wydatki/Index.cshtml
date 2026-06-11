@@ -2,6 +2,48 @@
 
 <h1>Lista wydatków</h1>
 
+
+<h4>Łączne wydatki: @ViewBag.SumaWydatkow zł</h4>
+
+<h4>Podsumowanie kategorii</h4>
+
+<ul>
+@foreach (var pozycja in ViewBag.PodsumowanieKategorii)
+{
+    <li>
+        @pozycja.Kategoria: @pozycja.Suma zł
+    </li>
+}
+</ul>
+
+
+<form method="get">
+    <label>Kategoria:</label>
+
+    <select name="kategoriaId" asp-items="ViewBag.Kategorie">
+        <option value="">Wszystkie</option>
+    </select>
+
+    <label>Opis:</label>
+    <input type="text" name="szukaj" value="@ViewBag.Szukaj" />
+
+    <label>Sortowanie:</label>
+
+    <select name="sortowanie">
+        <option value="">Brak</option>
+        <option value="kwota_rosnaco">Kwota rosnąco</option>
+        <option value="kwota_malejaco">Kwota malejąco</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary btn-sm">
+        Filtruj
+    </button>
+
+
+</form>
+
+<br />
+
 <p>
     <a asp-action="Create" class="btn btn-primary">Dodaj wydatek</a>
 </p>

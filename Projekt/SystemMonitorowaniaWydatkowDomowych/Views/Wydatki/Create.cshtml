@@ -1,0 +1,36 @@
+@model SystemMonitorowaniaWydatkowDomowych.Models.Wydatek
+
+<h1>Dodaj wydatek</h1>
+
+<form asp-action="Create">
+
+    <div>
+        <label asp-for="Opis"></label>
+        <input asp-for="Opis" />
+    </div>
+
+    <div>
+        <label asp-for="Kwota"></label>
+        <input asp-for="Kwota" />
+    </div>
+
+    <div>
+        <label asp-for="Data"></label>
+        <input asp-for="Data" type="date" />
+    </div>
+
+    <div>
+        <label asp-for="KategoriaId">Kategoria</label>
+        <select asp-for="KategoriaId" asp-items="ViewBag.KategoriaId"></select>
+    </div>
+
+    <div>
+        <label asp-for="MetodaPlatnosciId">Metoda płatności</label>
+        <select asp-for="MetodaPlatnosciId" asp-items="ViewBag.MetodaPlatnosciId"></select>
+    </div>
+
+    <br />
+
+    <button type="submit">Zapisz</button>
+
+</form>

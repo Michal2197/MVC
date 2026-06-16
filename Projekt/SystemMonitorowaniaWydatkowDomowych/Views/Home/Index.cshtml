@@ -1,8 +1,54 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona główna";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">System Monitorowania Wydatków Domowych</h1>
+
+    <hr />
+
+    <div class="row mt-4">
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Liczba wydatków
+                </div>
+                <div class="card-body">
+                    <h2>@ViewBag.LiczbaWydatkow</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Suma wydatków
+                </div>
+                <div class="card-body">
+                    <h2>@ViewBag.SumaWydatkow zł</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Największy wydatek
+                </div>
+                <div class="card-body">
+                    <h2>@ViewBag.NajwiekszyWydatek zł</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Wydatki"
+           asp-action="Index"
+           class="btn btn-primary">
+            Przejdź do wydatków
+        </a>
+    </div>
 </div>

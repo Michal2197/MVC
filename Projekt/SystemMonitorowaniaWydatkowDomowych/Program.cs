@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using SystemMonitorowaniaWydatkowDomowych.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<KontekstBazyDanych>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DomyslnePolaczenie")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 

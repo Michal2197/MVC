@@ -77,6 +77,7 @@ Projekt został wykonany przy użyciu:
 - Views
 - Data
 - Migrations
+- wwwroot
 
 ### Główne pliki
 

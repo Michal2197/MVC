@@ -19,6 +19,7 @@ namespace SystemMonitorowaniaWydatkowDomowych.Controllers
 
         public async Task<IActionResult> Index(
             int? kategoriaId,
+            int? metodaPlatnosciId,
             string? szukaj,
             string? sortowanie)
 
@@ -31,6 +32,11 @@ namespace SystemMonitorowaniaWydatkowDomowych.Controllers
             if (kategoriaId.HasValue)
             {
                 wydatkiQuery = wydatkiQuery.Where(w => w.KategoriaId == kategoriaId.Value);
+            }
+
+            if (metodaPlatnosciId.HasValue)
+            {
+                wydatkiQuery = wydatkiQuery.Where(w => w.MetodaPlatnosciId == metodaPlatnosciId.Value);
             }
 
             if (!string.IsNullOrWhiteSpace(szukaj))
@@ -53,6 +59,7 @@ namespace SystemMonitorowaniaWydatkowDomowych.Controllers
 
             ViewBag.SumaWydatkow = wydatki.Sum(w => w.Kwota);
             ViewBag.Kategorie = new SelectList(_kontekst.Kategorie, "Id", "Nazwa", kategoriaId);
+            ViewBag.MetodyPlatnosci = new SelectList(_kontekst.MetodyPlatnosci, "Id", "Nazwa", metodaPlatnosciId);
             ViewBag.Szukaj = szukaj;
             ViewBag.Sortowanie = sortowanie;
 
@@ -169,6 +176,7 @@ namespace SystemMonitorowaniaWydatkowDomowych.Controllers
                     new Kategoria { Nazwa = "Jedzenie" },
                     new Kategoria { Nazwa = "Transport" },
                     new Kategoria { Nazwa = "Rachunki" }
+
                 );
             }
 

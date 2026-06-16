@@ -127,3 +127,5 @@ namespace SystemMonitorowaniaWydatkowDomowych.Migrations
         }
     }
 }
+
+

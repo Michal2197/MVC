@@ -24,6 +24,12 @@
         <option value="">Wszystkie</option>
     </select>
 
+    <label>Metoda płatności:</label>
+
+    <select name="metodaPlatnosciId" asp-items="ViewBag.MetodyPlatnosci">
+        <option value="">Wszystkie</option>
+    </select>
+
     <label>Opis:</label>
     <input type="text" name="szukaj" value="@ViewBag.Szukaj" />
 

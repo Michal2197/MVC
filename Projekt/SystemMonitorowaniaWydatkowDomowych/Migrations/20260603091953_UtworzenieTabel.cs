@@ -91,3 +91,8 @@ namespace SystemMonitorowaniaWydatkowDomowych.Migrations
         }
     }
 }
+
+
+
+
+
